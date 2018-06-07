@@ -1,27 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html layout:decorate="~{layouts/layout}">
 <head>
-    <title></title>
+<title>Category form</title>
 </head>
 <body>
-    <h1>{{title}}</h1>
-    <form method="post">
-  
-    <div >
-    <label for="category-name">Nazwa</label>
-    <input id="category-name" type="text" name="name" value="{{category.name}}" autofocus>
-  </div>
-  
-  <div class="input-group">
-    <input  type="radio" name="type" value="outcome" id="radio-outcome" {{checked category.type "outcome"}}>
-    <label  for="radio-outcome">Wydatek</label>
-    <br>
-    <input type="radio" name="type" value="income" id="radio-income" {{checked category.type "income"}}>
-    <label for="radio-income">Wpływ</label>
-  </div>
-  
-  <br>
-  <button type="submit" class="btn btn-primary">Zapisz</button>
-</form>
+	<main class="main-content" layout:fragment="content">
+	<h1 th:text="${title}">Formularz kategorii</h1>
+	<form method="post" th:object="${category}">
+		<div>
+			<label for="category-name">Nazwa</label> 
+			<input id="category-name"
+				type="text" name="name" th:value="${name}" 
+				th:field="*{name}" autofocus>
+		</div>
+
+		<div>
+			<p th:each="type: ${categoryTypes}">
+				<input type="radio" th:field="*{type}" th:value="${type}"> <label
+					th:for="${#ids.prev('type')}" th:text="${type.getDescription()}">Wydatek</label>
+
+			</p>
+		</div>
+
+		<br>
+		<button type="submit" class="btn btn-primary">Zapisz</button>
+	</form>
+	</main>
 </body>
 </html>

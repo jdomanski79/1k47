@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
+  
   <head th:fragment="head">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -57,6 +58,6 @@
         
   </div>
     
-   <script src="static/index.js" th:fragment="script"></script>
+   <script th:src="@{/index.js}" th:fragment="script"></script>
   </body>
 </html>

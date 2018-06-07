@@ -21,9 +21,7 @@ public class Category {
     
     private CategoryType type;
     
-    public enum CategoryType{
-        INCOME, OUTCOME
-    }
+    
 
     public int getId(){
         return this.id;

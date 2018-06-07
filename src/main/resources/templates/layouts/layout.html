@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="fragments::head">
+	<title>1K47</title>
+</head>
+<body>
+	<div class="container">
+		<header th:replace="fragments::header"></header>
+		<nav th:replace="fragments::navigation"></nav>
+		<main class="main-content" layout:fragment="content">
+		</main>
+	</div>
+
+	<script th:replace="fragments::script"></script>
+</body>
+</html>
