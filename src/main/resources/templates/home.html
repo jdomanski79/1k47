@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head th:replace="fragments::head">
     <title>1K47</title>
 </head>
 <body>
-    Hello!
+    <div class="container">
+        <header th:replace="fragments::header">
+        Hello
+        </header>
+    </div>
 </body>
 </html>

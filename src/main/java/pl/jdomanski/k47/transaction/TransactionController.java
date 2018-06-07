@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.jdomanski.k47.category.Category;
 import pl.jdomanski.k47.category.Category.CategoryType;
 import pl.jdomanski.k47.category.CategoryRepository;
-
 import static java.time.LocalDate.now;
 
 @Controller

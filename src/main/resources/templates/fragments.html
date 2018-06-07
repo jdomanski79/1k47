@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head th:fragment="head">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>1K4,7</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet"> 
+    <link rel="stylesheet" th:href="@{style.css}"> 
+
+  </head>
+  
+  <body>
+    <div class="container">
+      <header th:fragment="header" class="main-head">
+        <h1 class="logo">
+          <a href="/">1K47</a>
+        </h1>
+        <div class="nav-mobile"><a id="nav-toggle" href="#">&#x2261;</a> </div>
+      </header>
+      <!-- Main navigation         -->
+      
+      <nav th:fragment="navigation" class="main-nav">
+        
+        <ul>
+          <li>
+            <a href="/transactions">
+              Transakcje
+            </a>
+          </li>
+          <li>
+            <a class="" href="/transaction/create">
+              Nowa
+            </a>
+          </li>
+           <li>
+            <a class="" href="/stats/">
+              Statystyki
+            </a>
+          </li>
+          <li>
+            <a class="" href="/categories">
+              Kategorie
+            </a>
+          </li>
+          <li>
+            <hr>{{user.name}}
+          </li>
+          <li>
+            <a href="/logout">
+              <span class="nav__text">Wyloguj</span>
+            </a>
+          </li>   
+        </ul>
+      </nav>
+      
+        
+  </div>
+    
+   <script src="static/index.js" th:fragment="script"></script>
+  </body>
+</html>
