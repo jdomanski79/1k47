@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 
 @Entity
@@ -16,7 +17,7 @@ public class Category {
     @Column(name="category_id")
     private int id;
     
-    //@UniqueElements
+    @NotBlank
     private String name;
     
     private CategoryType type;

@@ -1,0 +1,43 @@
+package pl.jdomanski.k47.category;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+
+
+@Service
+public class CategoryService {
+    
+    @Autowired
+    private CategoryRepository categoryRepository;
+    
+    public boolean save(Category category){
+       if (categoryRepository.findByName(category.getName()) != null){
+          System.out.println("Found catgory with that name. Aborting save..");
+          return false;
+       }
+        
+        System.out.println("Saving category: " + category.getName());
+        categoryRepository.save(category);
+        
+        return true;
+    }
+     
+    public Map< CategoryType, List<Category> > getCategoriesGroupedByType(){
+        // get categories from database
+        List<Category> incomes = categoryRepository.findByType(CategoryType.INCOME);
+	    List<Category> outcomes = categoryRepository.findByType(CategoryType.OUTCOME);
+	    
+	    // and put them into map
+	    Map<CategoryType, List <Category> > result = new HashMap<>();
+	    
+	    result.put(CategoryType.INCOME, incomes);
+	    result.put(CategoryType.OUTCOME, outcomes);
+	    
+	    return result;
+    }
+}

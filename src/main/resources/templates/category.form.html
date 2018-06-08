@@ -12,19 +12,27 @@
 			<input id="category-name"
 				type="text" name="name" th:value="${name}" 
 				th:field="*{name}" autofocus>
+		<!--<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Nieprawidłowa nazwa</p> -->
 		</div>
 
 		<div>
 			<p th:each="type: ${categoryTypes}">
 				<input type="radio" th:field="*{type}" th:value="${type}"> <label
-					th:for="${#ids.prev('type')}" th:text="${type.getDescription()}">Wydatek</label>
+					th:for="${#ids.prev('type')}" th:text="${type.getSingularDescription()}">Wydatek</label>
 
 			</p>
 		</div>
 
 		<br>
 		<button type="submit" class="btn btn-primary">Zapisz</button>
+		
+		<ul th:if="${#fields.hasErrors('*')}">
+            <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
+        </ul>
 	</form>
+	
+	
+    
 	</main>
 </body>
 </html>

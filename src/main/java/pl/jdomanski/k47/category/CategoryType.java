@@ -1,21 +1,23 @@
 package pl.jdomanski.k47.category;
 
 public enum CategoryType {
-        INCOME("Wpływ"), 
-        OUTCOME("Wydatek");
+        INCOME("Wpływ", "Wpływy"), 
+        OUTCOME("Wydatek", "Wydatki");
         
-        private String description;
+        private String singularDescription;
+        private String pluralDescription;
 
-		private CategoryType(String description) {
-			this.setDescription(description);
+		private CategoryType(String singular, String plural) {
+			this.singularDescription = singular;
+			this.pluralDescription = plural;
 		}
 
-		public String getDescription() {
-			return description;
+		public String getSingularDescription() {
+			return singularDescription;
 		}
 
-		public void setDescription(String description) {
-			this.description = description;
+		public String getPluralDescription() {
+			return pluralDescription;
 		}
 	
 }

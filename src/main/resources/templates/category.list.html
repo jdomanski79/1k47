@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layouts/layout}">
+<head>
+    <title>Lista kategorii</title>
+</head>
+<body>
+    <main class="main-content" layout:fragment="content">
+<table class="table">
+  <caption>Kategorie</caption>
+  <tbody th:each="type: ${categoryTypes}" >
+    <tr>
+      <th class="table__header" colspan="2" th:text="${type.getPluralDescription()}">Wpływy</th>
+    </tr>
+  
+  
+    <tr th:each="category : ${categories.get(type)}">
+      <td class="table__data" th:text="${category.getName()}">Jedzenie</td> 
+      <td class="table__data" >
+        <a href='#' th:href="@{'/category/' + ${category.getId()}}">Edytuj</a>
+      </td>
+    </tr>
+
+  </tbody>
+
+
+
+</table>
+
+<!-- <button class="input-name"> -->
+  <a href='/category'>Utwórz nową..</a>  
+<!-- </button> -->
+</main>
+</body>
+</html>
