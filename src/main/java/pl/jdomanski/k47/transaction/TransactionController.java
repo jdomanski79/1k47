@@ -2,14 +2,16 @@ package pl.jdomanski.k47.transaction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import pl.jdomanski.k47.category.Category;
-import pl.jdomanski.k47.category.CategoryType;
 import pl.jdomanski.k47.category.CategoryRepository;
-import static java.time.LocalDate.now;
+import pl.jdomanski.k47.category.CategoryType;
 
 @Controller
+@RequestMapping("/transaction")
 public class TransactionController {
 
     @Autowired
@@ -18,23 +20,13 @@ public class TransactionController {
     @Autowired
     CategoryRepository catDAO;
 
-    @RequestMapping("/")
-    public String homeController(){
-        
-        // testing stuff - to be deleted in later dev
-        Transaction transaction = new Transaction();
+    @GetMapping
+    public String transactionGet(Model model, Transaction transaction){
         Category category = new Category();
-
-        transaction.setDescription("Dane");
-        transaction.setDate(now());
-        repository.save(transaction);
-        
         category.setName("jedzenie");
         category.setType(CategoryType.OUTCOME);
-        catDAO.save(category);
-        
-
-        return "home";
+        model.addAttribute("categories", category);
+        return "transaction.form";
 
     }
 }

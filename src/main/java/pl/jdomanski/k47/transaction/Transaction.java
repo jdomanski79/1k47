@@ -2,31 +2,44 @@ package pl.jdomanski.k47.transaction;
 
 
 
-import javax.persistence.*;
+import static java.time.LocalDate.now;
+
 import java.time.LocalDate;
 
-import static java.time.LocalDate.now;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import pl.jdomanski.k47.category.Category;
 
 @Entity
 @Table(name="TRANSACTIONS")
 public class Transaction {
 
     @Id
-    @GeneratedValue
-    @Column(name="id")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="transaction_id")
     private int id;
 
-    @Column(name="date")
+    @NotNull
     private LocalDate date;
 
-    @Column(name="created")
     private LocalDate created = now();
 
-    @Column(name="description")
     private String description;
 
-    @Column(name="value")
-    private long value;
+    private long amount;
+    
+    @ManyToOne
+    @JoinColumn(name="category_id")
+    private Category category;
+    
 
 
 // getters and setters
@@ -63,6 +76,22 @@ public class Transaction {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public long getAmount(){
+        return amount;
+    }
+    
+    public void setAmount(long amount){
+        this.amount = amount;
+    }
+    
+    public Category getCategory(){
+        return category;
+    }
+    
+    public void setCategory(Category category){
+        this.category = category;
     }
 
 
