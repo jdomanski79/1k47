@@ -25,10 +25,13 @@
 
 		<br>
 		<button type="submit" class="btn btn-primary">Zapisz</button>
-		
-		<ul th:if="${#fields.hasErrors('*')}">
-            <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
-        </ul>
+
+<!-- 		Error messages -->
+		<div th:if="${#fields.hasErrors('*')}">
+            <p th:each="err : ${#fields.errors('*')}" th:text="${err}" class="validationError">
+            	Input is incorrect
+            </p>
+        </div>
 	</form>
 	
 	

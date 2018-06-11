@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/category")
@@ -39,28 +40,29 @@ public class CategoryController {
 	    
 	    model.addAttribute("categories", categoryService.getCategoriesGroupedByType());
 	    
-	    return "category.list";
+	    return "category/category.list";
 	}
 	
 // mappings method
 	@GetMapping
 	public String categoryGet(Category category) {
-		return "category.form";
+		return "category/category.form";
 	}
 	
 	@PostMapping
 	public String categoryPost(@Valid Category category, 
 			BindingResult bindingresult,
-			Model model) {
+			RedirectAttributes redirectAttributes) {
 		if (bindingresult.hasErrors()) {
-			return "category.form";
+			return "category/category.form";
 		}
 		
 		if (!categoryService.save(category)){
 		  bindingresult.rejectValue("name", "name exists", "Problem z zapisem. Taka kategoria już istnieje?");
-		  return "category.form";
+		  return "category/category.form";
 		}
 		
+		redirectAttributes.addFlashAttribute("message", "Wprowadzono nową kategorię!");
 		return "redirect:/category/list";
 	}
 }

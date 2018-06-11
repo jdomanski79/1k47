@@ -33,7 +33,8 @@ public class Transaction {
     private LocalDate created = now();
 
     private String description;
-
+    
+    @NotNull
     private long amount;
     
     @ManyToOne
@@ -93,6 +94,12 @@ public class Transaction {
     public void setCategory(Category category){
         this.category = category;
     }
+
+	@Override
+	public String toString() {
+		return "Transaction [id=" + id + ", date=" + date + ", created=" + created + ", description=" + description
+				+ ", amount=" + amount + ", category=" + category + "]";
+	}
 
 
 
