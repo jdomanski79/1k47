@@ -19,10 +19,10 @@ public class Category {
     @Column(name="category_id")
     private int id;
     
-    @NotBlank(message="Wprowadź nazwe kategorii")
+    @NotBlank
     private String name;
     
-    @NotNull(message="wybierz typ kategorii")
+    @NotNull
     private CategoryType type;
     
     
