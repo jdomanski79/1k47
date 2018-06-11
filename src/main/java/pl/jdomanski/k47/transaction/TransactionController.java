@@ -6,26 +6,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import pl.jdomanski.k47.category.Category;
-import pl.jdomanski.k47.category.CategoryRepository;
-import pl.jdomanski.k47.category.CategoryType;
+import pl.jdomanski.k47.category.CategoryService;
 
 @Controller
 @RequestMapping("/transaction")
 public class TransactionController {
 
     @Autowired
-    TransactionRepository repository;
+    TransactionService transactionService;
     
     @Autowired
-    CategoryRepository catDAO;
+    CategoryService categoryService;
 
     @GetMapping
     public String transactionGet(Model model, Transaction transaction){
-        Category category = new Category();
-        category.setName("jedzenie");
-        category.setType(CategoryType.OUTCOME);
-        model.addAttribute("categories", category);
+        
+        
+        
+        model.addAttribute("categories", categoryService.getAllCategories());
         return "transaction.form";
 
     }

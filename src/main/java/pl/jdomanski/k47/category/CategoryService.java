@@ -21,7 +21,9 @@ public class CategoryService {
     private CategoryRepository categoryRepository;
     
     public boolean save(Category category){
-       if (categoryRepository.findByName(category.getName()) != null){
+        category.setName(category.getName().toLowerCase());
+        
+        if (categoryRepository.findByName(category.getName()) != null){
            logger.info("Found catgory with that name. Aborting save..");
            return false;
        }
@@ -44,5 +46,9 @@ public class CategoryService {
 	    result.put(CategoryType.OUTCOME, outcomes);
 	    
 	    return result;
+    }
+    
+    public Iterable<Category> getAllCategories(){
+        return categoryRepository.findAll();
     }
 }
