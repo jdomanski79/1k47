@@ -50,4 +50,8 @@ public class Category {
     public void setType(CategoryType type){
         this.type = type;
     }
+    
+    public String toString(){
+        return "Category: " + this.name + ", type: " + this.type.getSingularDescription();
+    }
 }
