@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="categories")
 public class Category {
+    private final String CATEGORY_PATH="/category/";
+    
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -49,6 +51,10 @@ public class Category {
     
     public void setType(CategoryType type){
         this.type = type;
+    }
+    
+    public String getUrl(){
+        return CATEGORY_PATH + this.id;
     }
     
     public String toString(){
