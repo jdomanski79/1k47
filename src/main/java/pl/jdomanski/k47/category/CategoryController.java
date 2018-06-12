@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -45,6 +46,7 @@ public class CategoryController {
 	@GetMapping
 	public String categoryGet(Category category, Model model) {
 		model.addAttribute("title", "Wprowadź nową kategorie");
+		model.addAttribute("form_method", "post");
 		return "category/category.form";
 	}
 	
@@ -76,5 +78,32 @@ public class CategoryController {
 	    
 	    return "category/category.details";
 	}
+	
+	@GetMapping("/{id}/update")
+	public String categoryUpdateGet(@PathVariable int id, Model model){
+	    
+	    Category category = categoryService.findById(id);
+	    
+	    
+	    if (category != null){
+	        model.addAttribute("category", category);
+	        model.addAttribute("form_method", "put");
+	        model.addAttribute("title", "Wprowadź zmiany w kategorii");
+	    }
+	    
+	    return "category/category.form";
+	}
 
+    @PutMapping("/{id}/update")
+    public String categoryUpdatePut(
+        @Valid Category category, 
+        RedirectAttributes redirectAttributes){
+        
+        categoryService.update(category);
+        
+        redirectAttributes.addFlashAttribute("message", "Zaktualizowano kategorie " + category.getName());
+        
+        return "redirect:/category/list";
+    }
+    
 }
