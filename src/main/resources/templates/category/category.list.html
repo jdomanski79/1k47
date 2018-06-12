@@ -10,14 +10,17 @@
   <caption>Kategorie</caption>
   <tbody th:each="type: ${categoryTypes}" >
     <tr>
-      <th class="table__header" colspan="2" th:text="${type.getPluralDescription()}">Wpływy</th>
+      <th class="table__header" colspan="3" th:text="${type.getPluralDescription()}">Wpływy</th>
     </tr>
   
   
     <tr th:each="category : ${categories.get(type)}">
       <td class="table__data" th:text="${category.getName()}">Jedzenie</td> 
       <td class="table__data" >
-        <a href='#' th:href="@{'/category/' + ${category.getId()}}">Edytuj</a>
+        <a href='#' th:href="${category.url}+'/update'">Edytuj</a>
+      </td>
+      <td class="table__data" >
+        <a href='#' th:href="${category.url}+'/delete'">Usuń</a>
       </td>
     </tr>
 
