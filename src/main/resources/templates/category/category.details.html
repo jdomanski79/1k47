@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layouts/layout}">
+<head>
+    <title>Lista kategorii</title>
+</head>
+<body>
+    <main class="main-content" layout:fragment="content">
+        <h2 th:text="'Kategoria: ' + ${category.name}">
+            Kategoria: nazwa kategorii
+        </h2>
+        <h3 th:text="'Typ: ' + ${category.type.singularDescription}">
+            Typ: typ kategorii
+        </h3>
+        <br>
+    <a class="button" href='{{category.url}}/update'>Edytuj</a>
+    <a class="button" href='{{category.url}}/delete'>Usuń</a>
+</main>
+</body>
+</html>
+
+
