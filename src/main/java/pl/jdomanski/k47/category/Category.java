@@ -42,7 +42,7 @@ public class Category {
     }
     
     public void setName(String name){
-        this.name = name;
+        this.name = name.toLowerCase();
     }
     
     public CategoryType getType(){
@@ -58,6 +58,6 @@ public class Category {
     }
     
     public String toString(){
-        return "Category: " + this.name + ", type: " + this.type.getSingularDescription();
+        return "Category: id: " + this.id + ", name: " + this.name + ", type: " + this.type.getSingularDescription();
     }
 }
