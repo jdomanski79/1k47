@@ -30,10 +30,6 @@ public class CategoryController {
 		return Arrays.asList(CategoryType.values());
 	}
 	
-	@ModelAttribute("title")
-	public String title(){
-		return "Wprowadź kategorię";
-	}
 	
 
 // mappings methods
@@ -47,7 +43,8 @@ public class CategoryController {
 	
 
 	@GetMapping
-	public String categoryGet(Category category) {
+	public String categoryGet(Category category, Model model) {
+		model.addAttribute("title", "Wprowadź nową kategorie");
 		return "category/category.form";
 	}
 	
@@ -79,4 +76,5 @@ public class CategoryController {
 	    
 	    return "category/category.details";
 	}
+
 }
