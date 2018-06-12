@@ -6,13 +6,12 @@
 <body>
 	<main class="main-content" layout:fragment="content">
 	<h1 th:text="${title}">Formularz kategorii</h1>
-	<form method="post" th:object="${category}">
+	<form method="post" th:object="${category}" th:method="${form_method}">
 		<div>
 			<label for="category-name">Nazwa</label> 
 			<input id="category-name"
 				type="text" name="name" th:value="${name}" 
 				th:field="*{name}" autofocus>
-		<!--<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Nieprawidłowa nazwa</p> -->
 		</div>
 
 		<div>
@@ -26,7 +25,6 @@
 		<br>
 		<button type="submit" class="btn btn-primary">Zapisz</button>
 
-<!-- 		Error messages -->
 		<div th:if="${#fields.hasErrors('*')}">
             <p th:each="err : ${#fields.errors('*')}" th:text="${err}" class="validationError">
             	Input is incorrect
