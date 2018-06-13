@@ -57,6 +57,40 @@
       
         
   </div>
+  
+  <form th:fragment="transaction_filters_form" class="form hidden">
+  <fieldset>
+    
+    <label for="category" class="form__label">Kategoria </label>
+    <select class="form__input" name="category" id="category">
+      <option value=''>Wszystkie</option>
+        {{#each categories}} 
+           <option value='{{this._id}}' {{this.selected}} >{{this.name}}</option>
+        {{/each}}
+    </select>
+    
+    <label for="sort"  class="form__label">Sortuj</label>
+    <select class="form__input" name="sort" id="sort">
+      <option value='date-des'>data malejąco</option>
+      <option value='date-asc'>data rosnąco</option>
+      <option value='sum-asc'>kwota rosnąco</option>
+      <option value='sum-des'>kwota malejąco</option>
+    </select>
+    
+    <label for="range"  class="form__label">Zakres</label>
+    <select class="form__input" name="range" id="range">
+      {{!--<option value='this-week'>bieżący tydzień</option>--}}
+      <option value='this-month'>ten miesiąc</option>
+      {{!--<option value='last-3-months'>ostatnie 3 miesiace</option>--}}
+    </select>
+
+    <label for="description"  class="form__label">Opis</label>
+    <input class="form__input" type="text" name="description" id="description" value="{{query.description}}" placeholder="wpisz coś">
+    
+    <button type="submit" class="form__input form__input--submit">Szukaj</button>
+  </fieldset> 
+    
+</form>
     
    <script th:src="@{/index.js}" th:fragment="script"></script>
   </body>
