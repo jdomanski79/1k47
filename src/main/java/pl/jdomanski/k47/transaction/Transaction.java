@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import pl.jdomanski.k47.category.Category;
 
@@ -28,6 +29,7 @@ public class Transaction {
     private int id;
 
     @NotNull
+    @DateTimeFormat(pattern="dd-MM-yyyy")
     private LocalDate date;
 
     private LocalDate created = now();

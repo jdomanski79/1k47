@@ -6,7 +6,7 @@
 <body>
 
 <main class="main-content" layout:fragment="content">
-<form method='post' autocomplete='off' class="form" th:object="${transactionForm}">
+<form method='post' autocomplete='off' class="form" th:object="${transaction}">
   <fieldset>
     <legend th:text="${title}"></legend>    
     
@@ -27,16 +27,15 @@
 
     <button type="submit" class="form__input form__input--submit">Zapisz</button>
   </fieldset>
+  
+  <div th:if="${#fields.hasErrors('*')}">
+            <p th:each="err : ${#fields.errors('*')}" th:text="${err}" class="validationError">
+            	Input is incorrect
+            </p>
+</div>
 </form>
 
 
-{{#if errors}}
-  <ul>
-    {{#each errors}}
-      <li>{{this.msg}}</li>
-    {{/each}}
-  </ul>
-{{/if}}
 </main>
 </body>
 </html>

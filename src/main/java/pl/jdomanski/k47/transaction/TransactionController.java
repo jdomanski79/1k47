@@ -4,7 +4,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,24 +28,22 @@ public class TransactionController {
     public Iterable<Category> getAllCategories(){
     	return categoryService.getAllCategories();
     }
-    
+     
     @GetMapping
-    public String transactionGet(TransactionForm transactionForm){
+    public String transactionGet(Transaction transaction){
         // get all categories for transaction form
         return "transaction/transaction.form";
 
     }
     
     @PostMapping
-    public String transactionPost(@Valid TransactionForm transactionForm, 
-    		RedirectAttributes redirectAttributes, 
-    		BindingResult result) {
-    	
+    public String transactionPost(@Valid Transaction transaction, 
+    		 BindingResult result, RedirectAttributes redirectAttributes) {
+
     	if (result.hasErrors()) {
     		return "/transaction/transaction.form";
     	}
     	
-    	System.out.println(transactionForm.toString());
     	//convert amount to int
     	return "/transaction/transaction.form";
     }
