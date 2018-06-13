@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -43,8 +44,16 @@ public class TransactionController {
     	if (result.hasErrors()) {
     		return "/transaction/transaction.form";
     	}
+    	transactionService.save(transaction);
     	
+    	redirectAttributes.addFlashAttribute("message", "Utworzono nową transakcje");
     	//convert amount to int
-    	return "/transaction/transaction.form";
+    	return "redirect:/transaction/list";
+    }
+    
+    @GetMapping("/list")
+    public String transactionListGet(Model model){
+        model.addAttribute("transactions", transactionService.findAll());
+        return "/transaction/transaction.list";
     }
 }
