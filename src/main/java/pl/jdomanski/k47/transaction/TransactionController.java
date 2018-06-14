@@ -1,5 +1,7 @@
 package pl.jdomanski.k47.transaction;
 
+import java.time.LocalDate;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +34,7 @@ public class TransactionController {
      
     @GetMapping
     public String transactionGet(Transaction transaction){
-        // get all categories for transaction form
+        transaction.setDate(LocalDate.now());
         return "transaction/transaction.form";
 
     }
