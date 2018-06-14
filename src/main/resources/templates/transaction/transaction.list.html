@@ -6,14 +6,15 @@
 <body>
 
 <main class="main-content" layout:fragment="content">
-<h1 class="text-center">
-  {{title}}
+<h1 class="text-center" th:text="${message}">
+
 </h1>
 
-<label for="show-filters-checkbox" class="show-filters-checkbox">Filtry</label>
-<input type="checkbox" id="show-filters-checkbox">
 
 <!--
+    <label for="show-filters-checkbox" class="show-filters-checkbox">Filtry</label>
+    <input type="checkbox" id="show-filters-checkbox">
+
     <form th:replace="fragments::transaction_filters_form">
 -->
   <table class="table">
@@ -30,7 +31,7 @@
       <tr class="js-clickable" th:each="transaction :${transactions}" data-url="${transaction.url}" th:object="${transaction}">
         <td class="table__data align-center" th:text="${transaction.shortDate}">data</td>
         <td class="table__data table__data--wrapped align-left">
-            <span th:if="${description}" class="mobile">
+            <span th:if="${transaction.description}" class="mobile" th:utext="${transaction.description} + '</br>'">
               Opis transackcji
             </span>
           <span class="mobile-category {{this.category.type}}" th:text="${transaction.category.name}">
@@ -41,7 +42,6 @@
         <td class="table__data desktop" th:text="${transaction.description}">Opis transakcji</td>
         <td class="table__data align-center desktop"> Utworzył</td>
       </tr>
-    {{/each}}
 </table>
 <!-- </main> -->
 
