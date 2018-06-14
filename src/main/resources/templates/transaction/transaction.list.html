@@ -28,7 +28,7 @@
       </tr>
     </thead>
       <tr class="js-clickable" th:each="transaction :${transactions}" data-url="${transaction.url}" th:object="${transaction}">
-        <td class="table__data align-center">{{this.shortDate}}</td>
+        <td class="table__data align-center" th:text="${transaction.shortDate}">data</td>
         <td class="table__data table__data--wrapped align-left">
             <span th:if="${description}" class="mobile">
               Opis transackcji

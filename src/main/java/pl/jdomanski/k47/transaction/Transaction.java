@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import pl.jdomanski.k47.category.Category;
@@ -96,7 +97,12 @@ public class Transaction {
     public void setCategory(Category category){
         this.category = category;
     }
-
+    
+    public String getShortDate(){
+        String[] months = {"sty", "lut", "mar", "kwi", "maj", "cze", "lip", "sie", "wrz", "paź", "lis", "gru"};
+        return this.date.getDayOfMonth() + " " + months[this.date.getMonthValue() - 1];
+    }
+    
 	@Override
 	public String toString() {
 		return "Transaction [id=" + id + ", date=" + date + ", created=" + created + ", description=" + description
