@@ -1,1 +1,2 @@
 - [ ] - add HTML validation in forms: category.form, transaction.form
+
