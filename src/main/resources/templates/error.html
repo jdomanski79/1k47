@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layouts/layout}">
+<head>
+    <title> Błąd</title>
+</head>
+<body>
+
+<main class="main-content" layout:fragment="content">
+	<h1> Coś poszło nie tak.. </h1>
+	<h2 th:text="${error}">Błąd</h2>
+</main>
+</body>
+</html>
