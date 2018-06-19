@@ -30,7 +30,7 @@ public class Transaction {
     private int id;
 
     @NotNull
-    @DateTimeFormat(pattern="dd-MM-yyyy")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate date;
 
     private LocalDate created = now();

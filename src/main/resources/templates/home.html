@@ -1,14 +1,39 @@
 <!DOCTYPE html>
-<html>
-<head th:replace="fragments::head">
-    <title>1K47</title>
+<html layout:decorate="~{layouts/layout}">
+<head>
+    <title> Błąd</title>
 </head>
 <body>
-    <div class="container">
-        <header th:replace="fragments::header"></header>
-         <nav th:replace="fragments::navigation"></nav>
-    </div>
+
+<main class="main-content" layout:fragment="content">
+
+<h1>
+   Witaj {{user.name}}!
+ </h1>
+ <h2>
+   Bilans miesiąca: {{bilans}} zł
+ </h2>
+ 
+<table class="table">
+    <tr>
+      <th class="table__header"> Wpływy:</th>
+      <th class="table__header" th:text="${#numbers.formatCurrency(INCOMESum/100)}"> Wpływy łącznie zł</th>
+    </tr>
+    <tr class="js-clickable" data-url="/transactions/?category={{this.id}}&range=this-month" th:each="category: ${INCOME}">
+      <td class="table__data" th:text="${category[0]}">{{this.name}}</td>
+      <td class="currency table__data" th:text="${#numbers.formatCurrency(category[1]/100)}">{{this.sum}} zł</td>
+    </tr>
     
-    <script th:replace="fragments::script"></script>
+    <tr>
+      <th class="table__header"> Wydatki:</th>
+      <th class="table__header" th:text="${#numbers.formatCurrency(OUTCOMESum/100)}"> Wydatki łącznie zł</th>
+    </tr>
+    <tr class="js-clickable" data-url="/transactions/?category={{this.id}}&range=this-month" th:each="category: ${OUTCOME}">
+      <td class="table__data" th:text="${category[0]}">Nazwa kategorii</td>
+      <td class="currency table__data" th:text="${#numbers.formatCurrency(category[1]/100)}">Kwota zł</td>
+    </tr>
+</table>
+
+</main>
 </body>
 </html>
