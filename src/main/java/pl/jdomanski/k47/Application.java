@@ -7,12 +7,16 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
+
+import pl.jdomanski.k47.converter.StringToAmountConverter;
 
 
 @SpringBootApplication
-public class Application {
+public class Application implements WebMvcConfigurer{
 
 	public static void main(String[] args) {
 
@@ -28,6 +32,12 @@ public class Application {
         SessionLocaleResolver slr = new SessionLocaleResolver();
         slr.setDefaultLocale(new Locale("pl", "PL"));
         return slr;
-}
+    }
+    
+    @Override
+    public void addFormatters(FormatterRegistry registry){
+        registry.addConverter(new StringToAmountConverter());
+        
+    }
 	
 }

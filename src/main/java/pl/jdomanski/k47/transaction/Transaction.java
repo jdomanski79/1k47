@@ -37,8 +37,7 @@ public class Transaction {
 
     private String description;
     
-    @NotNull
-    private long amount;
+    private Long amount;
     
     @ManyToOne
     @JoinColumn(name="category_id")
@@ -82,12 +81,16 @@ public class Transaction {
         this.description = description;
     }
     
-    public long getAmount(){
+    public Long getAmount(){
         return amount;
     }
     
-    public void setAmount(long amount){
+    public void setAmount(Long amount){
         this.amount = amount;
+    }
+    
+    public void setAmount(float amount){
+        this.amount = (long) (amount*100);
     }
     
     public Category getCategory(){
