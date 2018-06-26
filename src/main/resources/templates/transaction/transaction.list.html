@@ -38,7 +38,7 @@
                 
           </span>
         </td>
-        <td class="table__data currency" th:text="${transaction.amount}">100.00</td>
+        <td class="table__data currency" th:text="${#numbers.formatDecimal(transaction.amount/100.0, 1, 'WHITESPACE', 2, 'COMMA')}">100.00</td>
         <td class="table__data desktop" th:text="${transaction.description}">Opis transakcji</td>
         <td class="table__data align-center desktop"> Utworzył</td>
       </tr>
