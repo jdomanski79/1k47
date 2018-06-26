@@ -18,7 +18,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/static").permitAll()
                 .anyRequest().authenticated()
                 .and()
-            .formLogin();
+            .formLogin()
+            .and()
+            .csrf().disable();
     }
     
     @Autowired
