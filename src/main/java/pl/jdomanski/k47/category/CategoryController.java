@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import pl.jdomanski.k47.util.Mappings;
+
 @Controller
-@RequestMapping("/category")
 public class CategoryController {
 	
     @Autowired
@@ -34,7 +35,7 @@ public class CategoryController {
 	
 
 // mappings methods
-	@GetMapping("/list")
+	@GetMapping(Mappings.CATEGORIES_LIST)
 	public String categoryList(Model model){
 	    
 	    model.addAttribute("categories", categoryService.getCategoriesGroupedByType());
@@ -43,17 +44,18 @@ public class CategoryController {
 	}
 	
 
-	@GetMapping
+	@GetMapping(Mappings.CATEGORY_ADD)
 	public String categoryGet(Category category, Model model) {
 		model.addAttribute("title", "Wprowadź nową kategorie");
 		model.addAttribute("form_method", "post");
 		return "category/category.form";
 	}
 	
-	@PostMapping
+	@PostMapping(Mappings.CATEGORY_ADD)
 	public String categoryPost(@Valid Category category, 
 			BindingResult bindingresult,
 			RedirectAttributes redirectAttributes) {
+		
 		if (bindingresult.hasErrors()) {
 			return "category/category.form";
 		}
@@ -67,7 +69,7 @@ public class CategoryController {
 		return "redirect:/category/list";
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping(Mappings.CATEGORY_VIEW)
 	public String categoryDetailsGet(@PathVariable int id, Model model){
 	    Category category = categoryService.findById(id);
 	    
@@ -79,7 +81,7 @@ public class CategoryController {
 	    return "category/category.details";
 	}
 	
-	@GetMapping("/{id}/update")
+	@GetMapping(Mappings.CATEGORY_UPDATE)
 	public String categoryUpdateGet(@PathVariable int id, Model model){
 	    
 	    Category category = categoryService.findById(id);
@@ -94,7 +96,7 @@ public class CategoryController {
 	    return "category/category.form";
 	}
 
-    @PutMapping("/{id}/update")
+    @PutMapping(Mappings.CATEGORY_UPDATE)
     public String categoryUpdatePut(
         @Valid Category category, 
         RedirectAttributes redirectAttributes){
