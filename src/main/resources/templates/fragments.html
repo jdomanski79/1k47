@@ -25,12 +25,12 @@
         
         <ul>
           <li>
-            <a href="/transaction/list">
+            <a th:href="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTIONS_LIST}__}">
               Transakcje
             </a>
           </li>
           <li>
-            <a class="" href="/transaction">
+            <a class="" th:href="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTION_ADD}__}">
               Nowa
             </a>
           </li>
@@ -40,7 +40,7 @@
             </a>
           </li>
           <li>
-            <a class="" href="/categories">
+            <a class="" th:href="@{__${T(pl.jdomanski.k47.util.Mappings).CATEGORIES_LIST}__}">
               Kategorie
             </a>
           </li>

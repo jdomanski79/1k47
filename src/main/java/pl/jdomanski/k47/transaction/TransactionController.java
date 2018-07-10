@@ -1,8 +1,11 @@
 package pl.jdomanski.k47.transaction;
 
+
 import java.time.LocalDate;
 
 import javax.validation.Valid;
+
+import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,46 +19,59 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pl.jdomanski.k47.category.Category;
 import pl.jdomanski.k47.category.CategoryService;
+import pl.jdomanski.k47.util.AttributeNames;
+import pl.jdomanski.k47.util.Mappings;
+import pl.jdomanski.k47.util.ViewNames;
 
+
+@Slf4j
 @Controller
-@RequestMapping("/transaction")
+@RequestMapping
 public class TransactionController {
 
-    @Autowired
-    TransactionService transactionService;
+    // == fields ==
+    private final TransactionService transactionService;
+    private final CategoryService categoryService;
     
+    // == constructors ==
     @Autowired
-    CategoryService categoryService;
+    public TransactionController(TransactionService transactionService, CategoryService categoryService) {
+        this.transactionService = transactionService;
+        this.categoryService = categoryService;
+    }
     
+    // == model attributes == 
     @ModelAttribute("categories")
     public Iterable<Category> getAllCategories(){
     	return categoryService.getAllCategories();
     }
-     
-    @GetMapping
-    public String transactionGet(Transaction transaction){
+    
+    // == handler methods ==
+    @GetMapping(Mappings.TRANSACTION_ADD)
+    public String transactionAdd(Transaction transaction){
         transaction.setDate(LocalDate.now());
-        return "transaction/transaction.form";
+        return ViewNames.TRANSACTION_FORM;
 
     }
     
-    @PostMapping
-    public String transactionPost(@Valid Transaction transaction, 
+    @PostMapping(Mappings.TRANSACTION_ADD)
+    public String processTransaction(@Valid Transaction transaction, 
     		 BindingResult result, RedirectAttributes redirectAttributes) {
 
     	if (result.hasErrors()) {
-    		return "/transaction/transaction.form";
+    		return ViewNames.TRANSACTION_FORM;
     	}
+    	log.info("Saving transaction: {}", transaction);
     	transactionService.save(transaction);
     	
-    	redirectAttributes.addFlashAttribute("message", "Utworzono nową transakcje");
-    	//convert amount to int
-    	return "redirect:/transaction/list";
+    	redirectAttributes.addFlashAttribute(AttributeNames.MESSAGE, "Utworzono nową transakcje");
+    	
+    	return Mappings.TRANSACTIONS_LIST_REDIRECT;
     }
     
-    @GetMapping("/list")
+    @GetMapping(Mappings.TRANSACTIONS_LIST)
     public String transactionListGet(Model model){
         model.addAttribute("transactions", transactionService.findAll());
-        return "/transaction/transaction.list";
+        return ViewNames.TRANSACTIONS_LIST;
     }
 }

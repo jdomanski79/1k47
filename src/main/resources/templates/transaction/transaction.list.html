@@ -27,8 +27,7 @@
         <th class="table__header desktop">Opis</th>
         <th class="table__header desktop">Kto</th>
       </tr>
-    </thead>
-      <tr class="js-clickable" th:each="transaction :${transactions}" data-url="${transaction.url}" th:object="${transaction}">
+      <tr class="js-clickable" th:each="transaction : ${transactions}" th:data-url="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTION_VIEW}__(id=${transaction.id})}">
         <td class="table__data align-center" th:text="${transaction.shortDate}">data</td>
         <td class="table__data table__data--wrapped align-left">
             <span th:if="${transaction.description}" class="mobile" th:utext="${transaction.description} + '</br>'">
