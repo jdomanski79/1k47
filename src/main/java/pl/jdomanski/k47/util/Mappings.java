@@ -11,7 +11,16 @@ public final class Mappings {
     public static final String CATEGORY_DELETE = CATEGORY_ROOT + "/delete";
     public static final String CATEGORY_UPDATE = CATEGORY_ROOT + "/update";
     public static final String CATEGORY_VIEW = CATEGORY_ROOT + "/view";
-
+    
+    // --- transaction mappings --
+    private static final String TRANSACTION_ROOT = "transactions";
+    public static final String TRANSACTIONS_LIST  = TRANSACTION_ROOT;
+    public static final String TRANSACTIONS_LIST_REDIRECT  = "redirect:/" + TRANSACTION_ROOT;
+    public static final String TRANSACTION_ADD  = TRANSACTION_ROOT + "/add";
+    public static final String TRANSACTION_DELETE  = TRANSACTION_ROOT + "/delete";
+    public static final String TRANSACTION_UPDATE  = TRANSACTION_ROOT + "/update";
+    public static final String TRANSACTION_VIEW  = TRANSACTION_ROOT + "/view";
+    
         
     // == constructor ==
     private Mappings(){}
