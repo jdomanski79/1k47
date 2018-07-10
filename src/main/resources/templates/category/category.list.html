@@ -8,20 +8,22 @@
     <p th:if="${message}" th:text="${message}"></p>
 <table class="table">
   <caption>Kategorie</caption>
-  <tbody th:each="type: ${categoryTypes}" >
+  <tbody th:each="type: ${__${T(pl.jdomanski.k47.util.AttributeNames.CATEGORY_TYPES)}__}" >
     <tr>
       <th class="table__header" colspan="3" th:text="${type.getPluralDescription()}">Wpływy</th>
     </tr>
   
   
-    <tr th:each="category : ${categories.get(type)}">
-      <td class="table__data" th:text="${category.getName()}">Jedzenie</td> 
+    <tr th:each="category : ${__${T(pl.jdomanski.k47.util.AttributeNames.CATEGORIES_BY_TYPE)}__.get(type)}">
+      
+      <td class="table__data" th:text="${category.name}">Jedzenie</td> 
       <td class="table__data" >
-        <a href='#' th:href="${category.url}+'/update'">Edytuj</a>
+        <a href='#' th:href="@{__${T(pl.jdomanski.k47.util.Mappings).CATEGORY_VIEW}__(id=${category.id})}">Edytuj</a>
       </td>
       <td class="table__data" >
-        <a href='#' th:href="${category.url}+'/delete'">Usuń</a>
+        <a href='#' th:href="@{__${T(pl.jdomanski.k47.util.Mappings).CATEGORY_DELETE}__(id=${category.id})}">Usuń</a>
       </td>
+      
     </tr>
 
   </tbody>

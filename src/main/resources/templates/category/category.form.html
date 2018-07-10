@@ -6,7 +6,7 @@
 <body>
 	<main class="main-content" layout:fragment="content">
 	<h1 th:text="${title}">Formularz kategorii</h1>
-	<form method="post" th:object="${category}" th:method="${form_method}">
+	<form method="post" th:object="${category}">
 		<div>
 			<label for="category-name">Nazwa</label> 
 			<input id="category-name"
@@ -16,8 +16,9 @@
 
 		<div>
 			<p th:each="type: ${categoryTypes}">
-				<input type="radio" th:field="*{type}" th:value="${type}"> <label
-					th:for="${#ids.prev('type')}" th:text="${type.getSingularDescription()}">Wydatek</label>
+				<input type="radio" th:field="*{type}" th:value="${type}"> 
+				<label th:for="${#ids.prev('type')}" th:text="${type.getSingularDescription()}">Wydatek
+				</label>
 
 			</p>
 		</div>

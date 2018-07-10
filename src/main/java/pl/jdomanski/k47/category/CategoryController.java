@@ -14,41 +14,44 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import pl.jdomanski.k47.util.AttributeNames;
 import pl.jdomanski.k47.util.Mappings;
+import pl.jdomanski.k47.util.ViewNames;
 
 @Controller
 public class CategoryController {
 	
+	// == fields == 
+    private final CategoryService categoryService;
+
+    // == constructors ==
     @Autowired
-    CategoryService categoryService;
-
-
-// model attributes	
-	@ModelAttribute("categoryTypes")
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
+    
+    // == model attributes ==
+	@ModelAttribute(AttributeNames.CATEGORY_TYPES)
 	public List<CategoryType> getTypes(){
 		return Arrays.asList(CategoryType.values());
 	}
 	
-	
-
-// mappings methods
+	// == handler methods ==
 	@GetMapping(Mappings.CATEGORIES_LIST)
 	public String categoryList(Model model){
 	    
-	    model.addAttribute("categories", categoryService.getCategoriesGroupedByType());
+	    model.addAttribute(AttributeNames.CATEGORIES_BY_TYPE, categoryService.getCategoriesGroupedByType());
 	    
-	    return "category/category.list";
+	    return ViewNames.CATEGORIES_LIST;
 	}
 	
 
 	@GetMapping(Mappings.CATEGORY_ADD)
 	public String categoryGet(Category category, Model model) {
-		model.addAttribute("title", "Wprowadź nową kategorie");
-		model.addAttribute("form_method", "post");
-		return "category/category.form";
+		model.addAttribute(AttributeNames.TITLE, "Wprowadź nową kategorie");
+		return ViewNames.CATEGORIES_FORM;
 	}
 	
 	@PostMapping(Mappings.CATEGORY_ADD)
@@ -57,30 +60,20 @@ public class CategoryController {
 			RedirectAttributes redirectAttributes) {
 		
 		if (bindingresult.hasErrors()) {
-			return "category/category.form";
+			return ViewNames.CATEGORIES_FORM;
 		}
 		
 		if (!categoryService.save(category)){
 		  bindingresult.rejectValue("name", "name exists", "Problem z zapisem. Taka kategoria już istnieje?");
-		  return "category/category.form";
+		  return ViewNames.CATEGORIES_FORM;
 		}
 		
-		redirectAttributes.addFlashAttribute("message", "Wprowadzono nową kategorię!");
-		return "redirect:/category/list";
+		redirectAttributes.addFlashAttribute(AttributeNames.MESSAGE, "Wprowadzono nową kategorię!");
+		
+		return Mappings.CATEGORIES_LIST_REDIRECT;
 	}
 	
-	@GetMapping(Mappings.CATEGORY_VIEW)
-	public String categoryDetailsGet(@PathVariable int id, Model model){
-	    Category category = categoryService.findById(id);
-	    
-	    if (category != null){
-	       model.addAttribute("category", category);
-        }
-
-	    
-	    return "category/category.details";
-	}
-	
+		
 	@GetMapping(Mappings.CATEGORY_UPDATE)
 	public String categoryUpdateGet(@PathVariable int id, Model model){
 	    
@@ -88,24 +81,21 @@ public class CategoryController {
 	    
 	    
 	    if (category != null){
-	        model.addAttribute("category", category);
-	        model.addAttribute("form_method", "put");
-	        model.addAttribute("title", "Wprowadź zmiany w kategorii");
+	        model.addAttribute(AttributeNames.CATEGORY, category);
+	        model.addAttribute(AttributeNames.TITLE, "Wprowadź zmiany w kategorii");
 	    }
 	    
-	    return "category/category.form";
+	    return ViewNames.CATEGORIES_FORM;
 	}
 
     @PutMapping(Mappings.CATEGORY_UPDATE)
-    public String categoryUpdatePut(
-        @Valid Category category, 
-        RedirectAttributes redirectAttributes){
+    public String categoryUpdatePut( @Valid Category category, RedirectAttributes redirectAttributes){
         
         categoryService.update(category);
         
-        redirectAttributes.addFlashAttribute("message", "Zaktualizowano kategorie " + category.getName());
+        redirectAttributes.addFlashAttribute(AttributeNames.MESSAGE, "Zaktualizowano kategorie " + category.getName());
         
-        return "redirect:/category/list";
+        return Mappings.CATEGORIES_LIST_REDIRECT;
     }
     
 }
