@@ -11,6 +11,7 @@ public final class ViewNames {
     // --- transaction views ---
     public static final String TRANSACTIONS_LIST = "transaction/transaction.list";
     public static final String TRANSACTION_FORM = "transaction/transaction.form";
+    public static final String TRANSACTION_VIEW = "transaction/transaction.view";
     
     // == constructors ==
     private ViewNames(){}

@@ -15,4 +15,6 @@ public interface TransactionRepository extends CrudRepository<Transaction, Long>
         "where t.category.type = ?1 and Month(t.date) = Month(curdate()) and year(t.date) = year(curdate()) " +
         "Group by t.category order by sum(t.amount)")
     public List<Object[]> findByTypeAndSumAmountInCurrentMonth(CategoryType type);
+    
+    public Transaction findById(int id);
 }

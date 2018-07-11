@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layouts/layout}">
+<head>
+    <title> Formularz transakcji</title>
+</head>
+<body>
+
+<main class="main-content" layout:fragment="content">
+    <table>
+        <caption>Szczegóły transakcji</caption>
+        <tr>
+            <th class="table__header">Id</th>
+            <td class="table__data" th:text="${transaction.id}">Id</td>
+        </tr>
+        
+        <tr>
+            <th class="table__header">Data</th>
+            <td class="table__data" th:text="${transaction.shortDate}">2018-02-14</td>
+        </tr>
+        
+        <tr>
+            <th class="table__header">Kategoria</th>
+            <td class="table__data" th:text="${transaction.category.name}">Jedzenie</td>
+        </tr>
+        
+        <tr>
+            <th class="table__header">Kwota</th>
+            <td class="table__data" 
+                th:text="${#numbers.formatDecimal(transaction.amount/100.0, 1, 'WHITESPACE', 2, 'COMMA')} + 'zł'">
+                1500.0 zł
+            </td>
+        </tr>
+        <tr>
+            <th class="table__header">Opis</th>
+            <td class="table__data align-left" th:text="${transaction.description}">Zakupy w biedronce</td>
+        </tr>
+    </table>
+    
+    <form action="edit">
+        <input type="submit" value="Edytuj" />
+    </form>
+    
+    <form action="delete">
+        <input type="submit" value="Usuń" />
+    </form>
+    
+</main>
+</body>
+</html>

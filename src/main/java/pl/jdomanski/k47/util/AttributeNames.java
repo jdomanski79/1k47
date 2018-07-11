@@ -6,6 +6,8 @@ public final class AttributeNames {
     public final static String TITLE = "title";
     public final static String MESSAGE = "message";
     public final static String CATEGORY = "category";
+    public final static String TRANSACTION = "transaction";
+    
     public final static String CATEGORY_TYPES = "categoryTypes";
     public final static String CATEGORIES_BY_TYPE = "categoriesByType";
     

@@ -16,4 +16,8 @@ public class TransactionService {
     public Iterable<Transaction> findAll(){
         return transactionRepository.findAllByOrderByDateDesc();
     }
+    
+    public Transaction findById(int id){
+        return transactionRepository.findById(id);
+    }
 }

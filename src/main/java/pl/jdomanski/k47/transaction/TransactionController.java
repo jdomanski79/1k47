@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pl.jdomanski.k47.category.Category;
@@ -71,7 +72,18 @@ public class TransactionController {
     
     @GetMapping(Mappings.TRANSACTIONS_LIST)
     public String transactionListGet(Model model){
+        
         model.addAttribute("transactions", transactionService.findAll());
         return ViewNames.TRANSACTIONS_LIST;
+    }
+    
+    @GetMapping(Mappings.TRANSACTION_VIEW)
+    public String transactionView(@RequestParam int id, Model model){
+        
+        Transaction transaction = transactionService.findById(id);
+        model.addAttribute(AttributeNames.TRANSACTION, transaction);
+        log.info("Viewing transaction: {}", transaction);
+        
+        return ViewNames.TRANSACTION_VIEW;
     }
 }
