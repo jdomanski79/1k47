@@ -6,43 +6,38 @@
 <body>
 
 <main class="main-content" layout:fragment="content">
-    <table>
+    <table class="table">
         <caption>Szczegóły transakcji</caption>
         <tr>
-            <th class="table__header">Id</th>
+            <th class="table__header table__header--fixed">Id</th>
             <td class="table__data" th:text="${transaction.id}">Id</td>
         </tr>
         
         <tr>
-            <th class="table__header">Data</th>
+            <th class="table__header table__header--fixed">Data</th>
             <td class="table__data" th:text="${transaction.shortDate}">2018-02-14</td>
         </tr>
         
         <tr>
-            <th class="table__header">Kategoria</th>
+            <th class="table__header table__header--fixed">Kategoria</th>
             <td class="table__data" th:text="${transaction.category.name}">Jedzenie</td>
         </tr>
         
         <tr>
-            <th class="table__header">Kwota</th>
+            <th class="table__header table__header--fixed">Kwota</th>
             <td class="table__data" 
                 th:text="${#numbers.formatDecimal(transaction.amount/100.0, 1, 'WHITESPACE', 2, 'COMMA')} + 'zł'">
                 1500.0 zł
             </td>
         </tr>
         <tr>
-            <th class="table__header">Opis</th>
+            <th class="table__header table__header--fixed">Opis</th>
             <td class="table__data align-left" th:text="${transaction.description}">Zakupy w biedronce</td>
         </tr>
     </table>
     
-    <form action="edit">
-        <input type="submit" value="Edytuj" />
-    </form>
-    
-    <form action="delete">
-        <input type="submit" value="Usuń" />
-    </form>
+<a class="button" th:href="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTION_ADD}__(id=${transaction.id})}" href='/transactions/update'>Edytuj</a>
+<a class="button" th:href="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTION_DELETE}__(id=${transaction.id})}" href='/transactions/delete'>Usuń</a>
     
 </main>
 </body>

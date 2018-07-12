@@ -11,7 +11,7 @@ public class TransactionService {
     
     public void save(Transaction transaction){
         transactionRepository.save(transaction);
-    }
+    } 
     
     public Iterable<Transaction> findAll(){
         return transactionRepository.findAllByOrderByDateDesc();

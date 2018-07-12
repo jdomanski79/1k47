@@ -49,23 +49,44 @@ public class TransactionController {
     
     // == handler methods ==
     @GetMapping(Mappings.TRANSACTION_ADD)
-    public String transactionAdd(Transaction transaction){
-        transaction.setDate(LocalDate.now());
-        return ViewNames.TRANSACTION_FORM;
+    public String transactionAdd(@RequestParam(required = false, defaultValue = "-1") int id, 
+                    Model model){
+        
+        Transaction transaction = transactionService.findById(id);
+        
+        if (transaction == null){
+            transaction = new Transaction();
+            transaction.setDate(LocalDate.now());
+        } else {
+            // editing existing transaction - convert amount
+            transaction.setAmount(transaction.getAmount() / 100);
+        }
 
+        log.info("Transaction is {}", transaction);
+        model.addAttribute(AttributeNames.TRANSACTION, transaction);
+        
+        return ViewNames.TRANSACTION_FORM;
     }
     
     @PostMapping(Mappings.TRANSACTION_ADD)
     public String processTransaction(@Valid Transaction transaction, 
-    		 BindingResult result, RedirectAttributes redirectAttributes) {
+    		 BindingResult result, RedirectAttributes redirectAttributes, Model model) {
 
     	if (result.hasErrors()) {
+    	    log.error(result.getFieldError("date").toString());
+
+    	    model.addAttribute(AttributeNames.TRANSACTION, transaction);
     		return ViewNames.TRANSACTION_FORM;
     	}
-    	log.info("Saving transaction: {}", transaction);
-    	transactionService.save(transaction);
     	
-    	redirectAttributes.addFlashAttribute(AttributeNames.MESSAGE, "Utworzono nową transakcje");
+    	log.info("Saving transaction: {}", transaction);
+    	
+    	transactionService.save(transaction);
+    	String message = "Utworzono nową transakcje.";
+    	if (transaction.getId() != 0){
+    	    message = "Zaktualizowano transakcje.";
+    	}
+    	redirectAttributes.addFlashAttribute(AttributeNames.MESSAGE, message);
     	
     	return Mappings.TRANSACTIONS_LIST_REDIRECT;
     }
