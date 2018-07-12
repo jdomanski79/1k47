@@ -16,9 +16,8 @@ public final class Mappings {
     private static final String TRANSACTION_ROOT = "/transactions";
     public static final String TRANSACTIONS_LIST  = TRANSACTION_ROOT;
     public static final String TRANSACTIONS_LIST_REDIRECT  = "redirect:" + TRANSACTION_ROOT;
-    public static final String TRANSACTION_ADD  = TRANSACTION_ROOT + "/add";
+    public static final String TRANSACTION_ADD  = TRANSACTION_ROOT + "/addEdit";
     public static final String TRANSACTION_DELETE  = TRANSACTION_ROOT + "/delete";
-    public static final String TRANSACTION_UPDATE  = TRANSACTION_ROOT + "/update";
     public static final String TRANSACTION_VIEW  = TRANSACTION_ROOT + "/view";
     
         

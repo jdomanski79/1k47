@@ -56,11 +56,10 @@ public class TransactionController {
         
         if (transaction == null){
             transaction = new Transaction();
+            transaction.setAmount(0L);
+            transaction.setCategory(new Category());
             transaction.setDate(LocalDate.now());
-        } else {
-            // editing existing transaction - convert amount
-            transaction.setAmount(transaction.getAmount() / 100);
-        }
+        } 
 
         log.info("Transaction is {}", transaction);
         model.addAttribute(AttributeNames.TRANSACTION, transaction);
@@ -73,7 +72,6 @@ public class TransactionController {
     		 BindingResult result, RedirectAttributes redirectAttributes, Model model) {
 
     	if (result.hasErrors()) {
-    	    log.error(result.getFieldError("date").toString());
 
     	    model.addAttribute(AttributeNames.TRANSACTION, transaction);
     		return ViewNames.TRANSACTION_FORM;
@@ -107,4 +105,50 @@ public class TransactionController {
         
         return ViewNames.TRANSACTION_VIEW;
     }
+    
+    @GetMapping(Mappings.TRANSACTION_DELETE)
+    public String transactionDelete(@RequestParam int id, Model model) {
+    	
+    	Transaction transaction = transactionService.findById(id);
+    	model.addAttribute(AttributeNames.TRANSACTION, transaction);
+    	
+    	log.info("Transaction of id {} is about to be deleted", id);
+    	
+    	return ViewNames.TRANSACTION_DELETE;
+    	
+    }
+    
+    @PostMapping(Mappings.TRANSACTION_DELETE)
+    public String deleteTransaction(@RequestParam int id,
+    			RedirectAttributes redirectAttributes) {
+    	log.info("Deleting transaction of id {}", id);
+    	transactionService.deleteTransaction(id);
+    	
+    	redirectAttributes.addFlashAttribute(AttributeNames.MESSAGE, "Usunięto transakcję!");
+    	return Mappings.TRANSACTIONS_LIST_REDIRECT;
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

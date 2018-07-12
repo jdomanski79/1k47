@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layouts/layout}">
+<html layout:decorate="~{layouts/layout}" xmlns:th="www.thymeleaf.org">
 <head>
     <title> Formularz transakcji</title>
 </head>
 <body>
 
 <main class="main-content" layout:fragment="content">
+ 	<h2>Zamierzasz usunąć transakcję. Czy jesteś pewien?</h2>
+    <form 
+    	th:action="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTION_DELETE}__(id=${transaction.id})}" 
+    	method="post">
+  		<input class="button" type="submit" value="Usuń"/>
+    </form>
+    
     <table class="table">
         <caption>Szczegóły transakcji</caption>
         <tr>
@@ -26,7 +33,7 @@
         <tr>
             <th class="table__header table__header--fixed">Kwota</th>
             <td class="table__data" 
-                th:text="${#numbers.formatDecimal(transaction.amount/100.0, 1, 'WHITESPACE', 2, 'COMMA')} + ' zł'">
+                th:text="${#numbers.formatDecimal(transaction.amount/100.0, 1, 'WHITESPACE', 2, 'COMMA')} + 'zł'">
                 1500.0 zł
             </td>
         </tr>
@@ -36,8 +43,6 @@
         </tr>
     </table>
     
-<a class="button" th:href="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTION_ADD}__(id=${transaction.id})}" href='/transactions/update'>Edytuj</a>
-<a class="button" th:href="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTION_DELETE}__(id=${transaction.id})}" href='/transactions/delete'>Usuń</a>
     
 </main>
 </body>

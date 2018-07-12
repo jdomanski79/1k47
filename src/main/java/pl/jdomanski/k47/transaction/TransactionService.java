@@ -20,4 +20,8 @@ public class TransactionService {
     public Transaction findById(int id){
         return transactionRepository.findById(id);
     }
+    
+    public void deleteTransaction(int id) {
+    	transactionRepository.deleteById(id);
+    }
 }

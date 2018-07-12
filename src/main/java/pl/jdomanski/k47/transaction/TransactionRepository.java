@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import pl.jdomanski.k47.category.CategoryType;
 
-public interface TransactionRepository extends CrudRepository<Transaction, Long> {
+public interface TransactionRepository extends CrudRepository<Transaction, Integer> {
     
     public List<Transaction> findAllByOrderByDateDesc();
     
