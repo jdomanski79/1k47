@@ -47,6 +47,13 @@ public class Transaction {
     @JoinColumn(name="category_id")
     private Category category;
     
+    // == constructors == 
+    public Transaction (LocalDate date, String description, Long amount){
+        this.date = date;
+        this.description = description;
+        this.amount = amount;
+    }
+
     // == public methods ==
     public String getShortDate(){
         String[] months = {"sty", "lut", "mar", "kwi", "maj", "cze", "lip", "sie", "wrz", "paź", "lis", "gru"};
