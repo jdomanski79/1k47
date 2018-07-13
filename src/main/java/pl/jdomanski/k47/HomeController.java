@@ -20,9 +20,6 @@ public class HomeController {
     public String home(Model model){
         
         model = categoryService.findAndSumByIncomeInCurrentMonth(model);
-            
-        System.out.println(model);            
-
         return "home";
     }
 }
