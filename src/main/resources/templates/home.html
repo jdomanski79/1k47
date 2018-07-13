@@ -19,18 +19,19 @@
       <th class="table__header"> Wpływy:</th>
       <th class="table__header" th:text="${#numbers.formatDecimal(INCOMESum/100.0, 1, 'WHITESPACE', 2, 'COMMA') + ' zł'}"> Wpływy łącznie zł</th>
     </tr>
-    <tr class="js-clickable" data-url="/transactions/?category={{this.id}}&range=this-month" th:each="category: ${INCOME}">
-      <td class="table__data" th:text="${category[0]}">{{this.name}}</td>
-      <td class="currency table__data" th:text="${#numbers.formatDecimal(category[1]/100.0, 1, 'WHITESPACE', 2, 'COMMA') + ' zł'}">{{this.sum}} zł</td>
+    <tr class="js-clickable" th:data-url="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTIONS_LIST}__(category=${category[0]})}" 
+        th:each="category: ${INCOME}" th:with="categoryID=${category[0]}">
+      <td class="table__data" th:text="${category[1]}">{{this.name}}</td>
+      <td class="currency table__data" th:text="${#numbers.formatDecimal(category[2]/100.0, 1, 'WHITESPACE', 2, 'COMMA') + ' zł'}">{{this.sum}} zł</td>
     </tr>
     
     <tr>
       <th class="table__header"> Wydatki:</th>
       <th class="table__header" th:text="${#numbers.formatDecimal(OUTCOMESum/100.0, 1, 'WHITESPACE', 2, 'COMMA') + ' zł'}"> Wydatki łącznie zł</th>
     </tr>
-    <tr class="js-clickable" data-url="/transactions/?category={{this.id}}&range=this-month" th:each="category: ${OUTCOME}">
-      <td class="table__data" th:text="${category[0]}">Nazwa kategorii</td>
-      <td class="currency table__data" th:text="${#numbers.formatDecimal(category[1]/100.0, 1, 'WHITESPACE',2 , 'COMMA') + ' zł'}">Kwota zł</td>
+    <tr class="js-clickable" th:data-url="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTIONS_LIST}__(category=${category[0]})}" th:each="category: ${OUTCOME}">
+      <td class="table__data" th:text="${category[1]}">Nazwa kategorii</td>
+      <td class="currency table__data" th:text="${#numbers.formatDecimal(category[2]/100.0, 1, 'WHITESPACE',2 , 'COMMA') + ' zł'}">Kwota zł</td>
     </tr>
 </table>
 

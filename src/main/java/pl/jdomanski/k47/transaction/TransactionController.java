@@ -90,9 +90,13 @@ public class TransactionController {
     }
     
     @GetMapping(Mappings.TRANSACTIONS_LIST)
-    public String transactionListGet(Model model){
-        
-        model.addAttribute("transactions", transactionService.findAll());
+    public String transactionListGet(Model model,
+            @RequestParam (required = false) Integer category,
+            @RequestParam (required = false) Integer month,
+            @RequestParam (required = false) Integer year
+        ){
+        model.addAttribute("transactions", transactionService.findByParams(category));
+        //model.addAttribute("transactions", transactionService.findAll());
         return ViewNames.TRANSACTIONS_LIST;
     }
     

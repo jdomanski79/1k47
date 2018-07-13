@@ -81,7 +81,7 @@ public class CategoryService {
             
             sum = 0;
             for(Object[] c: categories){
-                sum += (long) c[1];
+                sum += (long) c[2];
             }
             
             balance += sum;
