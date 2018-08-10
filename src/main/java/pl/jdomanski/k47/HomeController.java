@@ -1,5 +1,7 @@
 package pl.jdomanski.k47;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,15 +13,23 @@ import pl.jdomanski.k47.category.CategoryService;
 @Controller
 @RequestMapping("/")
 public class HomeController {
+    
+	// == fields ==
+	private final CategoryService categoryService;
+    
+    // == constructors ==
     @Autowired
-    CategoryService categoryService;
-    
-    
-    
-    @GetMapping
+    public HomeController(CategoryService categoryService) {
+		this.categoryService = categoryService;
+	}
+
+    // == handler methods ==
+	@GetMapping
     public String home(Model model){
         
         model = categoryService.findAndSumByIncomeInCurrentMonth(model);
+        model.addAttribute("currentMonth", LocalDate.now().getMonthValue());
+        model.addAttribute("currentYear", LocalDate.now().getYear());
         return "home";
     }
 }

@@ -19,8 +19,8 @@ public interface TransactionRepository extends CrudRepository<Transaction, Integ
     public Transaction findById(int id);
     
 @Query("select t from Transaction t " +
-"where (?1 is null or t.category.id = ?1) ")
-//"and ("
-//    and (@param2 is null or col2 = @param2)
-    public List<Transaction> findByParams(Integer categoryId);
+"where (?1 is null or t.category.id = ?1) " + 
+	"and (?2 is null or month(t.date) = ?2)" + 
+	"and (?3 is null or year(t.date) = ?3)")
+    public List<Transaction> findByParamsOrderByDateDesc(Integer categoryId, Integer month, Integer year);
 }

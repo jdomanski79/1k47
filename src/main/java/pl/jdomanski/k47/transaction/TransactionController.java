@@ -60,7 +60,7 @@ public class TransactionController {
             transaction.setCategory(new Category());
             transaction.setDate(LocalDate.now());
         } 
-
+        
         log.info("Transaction is {}", transaction);
         model.addAttribute(AttributeNames.TRANSACTION, transaction);
         
@@ -79,11 +79,14 @@ public class TransactionController {
     	
     	log.info("Saving transaction: {}", transaction);
     	
-    	transactionService.save(transaction);
     	String message = "Utworzono nową transakcje.";
+    	
     	if (transaction.getId() != 0){
     	    message = "Zaktualizowano transakcje.";
     	}
+    	
+    	transactionService.save(transaction);
+    	
     	redirectAttributes.addFlashAttribute(AttributeNames.MESSAGE, message);
     	
     	return Mappings.TRANSACTIONS_LIST_REDIRECT;
@@ -95,7 +98,7 @@ public class TransactionController {
             @RequestParam (required = false) Integer month,
             @RequestParam (required = false) Integer year
         ){
-        model.addAttribute("transactions", transactionService.findByParams(category));
+        model.addAttribute("transactions", transactionService.findByParams(category, month, year));
         //model.addAttribute("transactions", transactionService.findAll());
         return ViewNames.TRANSACTIONS_LIST;
     }

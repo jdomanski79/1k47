@@ -20,7 +20,7 @@
       <th class="table__header" th:text="${#numbers.formatDecimal(INCOMESum/100.0, 1, 'WHITESPACE', 2, 'COMMA') + ' zł'}"> Wpływy łącznie zł</th>
     </tr>
     <tr class="js-clickable" 
-        th:data-url="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTIONS_LIST}__(category=${categoryId})}" 
+        th:data-url="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTIONS_LIST}__(category=${categoryId},month=${currentMonth}, year=${currentYear})}" 
         th:each="category: ${INCOME}" 
         th:with="categoryId=${category[0]}, categoryName=${category[1]}, categoryAmount=${category[2]}">
         
@@ -33,7 +33,7 @@
       <th class="table__header" th:text="${#numbers.formatDecimal(OUTCOMESum/100.0, 1, 'WHITESPACE', 2, 'COMMA') + ' zł'}"> Wydatki łącznie zł</th>
     </tr>
     <tr class="js-clickable" 
-        th:data-url="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTIONS_LIST}__(category=${category[0]})}" 
+        th:data-url="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTIONS_LIST}__(category=${category[0]},month=${currentMonth}, year=${currentYear})}" 
         th:each="category: ${OUTCOME}">
       <td class="table__data" th:text="${category[1]}">Nazwa kategorii</td>
       <td class="currency table__data" th:text="${#numbers.formatDecimal(category[2]/100.0, 1, 'WHITESPACE',2 , 'COMMA') + ' zł'}">Kwota zł</td>

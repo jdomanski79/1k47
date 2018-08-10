@@ -1,9 +1,7 @@
 package pl.jdomanski.k47.category;
 
-import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import org.slf4j.Logger;

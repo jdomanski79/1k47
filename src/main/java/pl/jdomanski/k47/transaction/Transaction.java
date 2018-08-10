@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
+import lombok.ToString;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -45,6 +46,7 @@ public class Transaction {
     
     @ManyToOne
     @JoinColumn(name="category_id")
+    @ToString.Exclude
     private Category category;
     
     // == constructors == 
