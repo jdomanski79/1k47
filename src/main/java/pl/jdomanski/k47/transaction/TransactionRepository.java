@@ -20,7 +20,8 @@ public interface TransactionRepository extends CrudRepository<Transaction, Integ
     
 @Query("select t from Transaction t " +
 "where (?1 is null or t.category.id = ?1) " + 
-	"and (?2 is null or month(t.date) = ?2)" + 
-	"and (?3 is null or year(t.date) = ?3)")
+"and (?2 is null or month(t.date) = ?2)" + 
+"and (?3 is null or year(t.date) = ?3)" + 
+"order by t.date desc")
     public List<Transaction> findByParamsOrderByDateDesc(Integer categoryId, Integer month, Integer year);
 }
