@@ -3,17 +3,31 @@ package pl.jdomanski.k47.transaction;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Service
+@SessionScope
+@Slf4j
 public class TransactionService {
     
-    @Autowired
-    TransactionRepository transactionRepository;
+	// == fields ==
+    private final TransactionRepository transactionRepository;
     
-    public void save(Transaction transaction){
+    // == constructors ==
+    @Autowired
+    public TransactionService(TransactionRepository transactionRepository) {
+		this.transactionRepository = transactionRepository;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		log.info("Transaction service for user {} constructed!", auth.getName());
+	}
+    
+    // == public methods ==
+	public void save(Transaction transaction){
         transactionRepository.save(transaction);
     } 
     
