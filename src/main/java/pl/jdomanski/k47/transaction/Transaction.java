@@ -44,13 +44,15 @@ public class Transaction {
     private Long amount;
     
     @ManyToOne
+    @JoinColumn(name="created_by")
+    private User createdBy;
+    
+    @ManyToOne
     @JoinColumn(name="category_id")
     @ToString.Exclude
     private Category category;
     
-    @ManyToOne
-    @JoinColumn(name="username")
-    private User createdBy;
+    
     
     // == constructors == 
 //    public Transaction (LocalDate date, Long amount, String description){

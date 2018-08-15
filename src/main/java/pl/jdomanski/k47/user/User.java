@@ -22,3 +22,6 @@ public class User {
 	
 	private String firstName;
 }
+
+// TODO change transaction list view
+

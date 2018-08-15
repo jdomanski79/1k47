@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pl.jdomanski.k47.category.Category;
 import pl.jdomanski.k47.category.CategoryService;
+import pl.jdomanski.k47.user.User;
+import pl.jdomanski.k47.user.UserService;
 import pl.jdomanski.k47.util.AttributeNames;
 import pl.jdomanski.k47.util.Mappings;
 import pl.jdomanski.k47.util.ViewNames;
@@ -33,12 +36,15 @@ public class TransactionController {
     // == fields ==
     private final TransactionService transactionService;
     private final CategoryService categoryService;
+    private final UserService userService;
     
     // == constructors ==
     @Autowired
-    public TransactionController(TransactionService transactionService, CategoryService categoryService) {
+    public TransactionController(TransactionService transactionService, 
+    			CategoryService categoryService, UserService userService) {
         this.transactionService = transactionService;
         this.categoryService = categoryService;
+        this.userService = userService;
     }
     
     // == model attributes == 
@@ -69,13 +75,17 @@ public class TransactionController {
     
     @PostMapping(Mappings.TRANSACTION_ADD)
     public String processTransaction(@Valid Transaction transaction, 
-    		 BindingResult result, RedirectAttributes redirectAttributes, Model model) {
+    		 BindingResult result, RedirectAttributes redirectAttributes, 
+    		 Model model, Authentication authentication) {
 
     	if (result.hasErrors()) {
 
     	    model.addAttribute(AttributeNames.TRANSACTION, transaction);
     		return ViewNames.TRANSACTION_FORM;
     	}
+    	
+    	User user = userService.findUserByUsername(authentication.getName());
+    	transaction.setCreatedBy(user);
     	
     	log.info("Saving transaction: {}", transaction);
     	
