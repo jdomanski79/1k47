@@ -1,7 +1,5 @@
 package pl.jdomanski.k47.transaction;
 
-
-
 import static java.time.LocalDate.now;
 
 import java.time.LocalDate;
@@ -22,6 +20,7 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import pl.jdomanski.k47.category.Category;
+import pl.jdomanski.k47.user.User;
 
 @Data
 @Entity
@@ -48,6 +47,10 @@ public class Transaction {
     @JoinColumn(name="category_id")
     @ToString.Exclude
     private Category category;
+    
+    @ManyToOne
+    @JoinColumn(name="username")
+    private User createdBy;
     
     // == constructors == 
 //    public Transaction (LocalDate date, Long amount, String description){
