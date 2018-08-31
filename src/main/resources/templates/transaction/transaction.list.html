@@ -31,7 +31,7 @@
       		th:data-url="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTION_VIEW}__(id=*{id})}">
         <td class="table__data align-center" th:text="*{shortDate}">data</td>
         <td class="table__data table__data--wrapped align-left">
-            <span th:if="${transaction.description}" class="mobile" th:utext="*{description} + '</br>'">
+            <span th:if="*{description} != ''" class="mobile" th:utext="*{description} + '</br>'">
               Opis transackcji
             </span>
           <span th:class="*{category.type.name().toLowerCase()} + ' mobile-category'" th:text="*{category.name}">
