@@ -22,7 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.jdomanski.k47.category.Category;
 import pl.jdomanski.k47.category.CategoryService;
 import pl.jdomanski.k47.user.User;
-import pl.jdomanski.k47.user.UserService;
 import pl.jdomanski.k47.util.AttributeNames;
 import pl.jdomanski.k47.util.Mappings;
 import pl.jdomanski.k47.util.ViewNames;
@@ -36,15 +35,13 @@ public class TransactionController {
     // == fields ==
     private final TransactionService transactionService;
     private final CategoryService categoryService;
-    private final UserService userService;
     
     // == constructors ==
     @Autowired
     public TransactionController(TransactionService transactionService, 
-    			CategoryService categoryService, UserService userService) {
+    			CategoryService categoryService) {
         this.transactionService = transactionService;
         this.categoryService = categoryService;
-        this.userService = userService;
     }
     
     // == model attributes == 
@@ -84,7 +81,7 @@ public class TransactionController {
     		return ViewNames.TRANSACTION_FORM;
     	}
     	
-    	User user = userService.findUserByUsername(authentication.getName());
+    	User user = (User) authentication.getPrincipal();
     	transaction.setCreatedBy(user);
     	
     	log.info("Saving transaction: {}", transaction);

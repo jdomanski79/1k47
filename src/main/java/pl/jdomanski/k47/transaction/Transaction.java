@@ -24,7 +24,7 @@ import pl.jdomanski.k47.user.User;
 
 @Data
 @Entity
-@Table(name="TRANSACTIONS")
+@Table
 public class Transaction {
     
     // == fields ==
