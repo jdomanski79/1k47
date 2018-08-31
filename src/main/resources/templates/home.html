@@ -11,7 +11,7 @@
    Witaj <span sec:authentication = "principal.firstName"> Użytkowniku!!</span>
  </h1>
  <h2>
-   Bilans miesiąca: {{bilans}} zł
+   Bilans miesiąca: <span th:text="${#numbers.formatDecimal(balance/100.0, 1, 'WHITESPACE', 2, 'COMMA') + ' zł'}">Bilans w zł</span>
  </h2>
  
 <table class="table">

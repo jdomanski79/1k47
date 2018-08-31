@@ -82,14 +82,18 @@ public class CategoryService {
                 sum += (long) c[2];
             }
             
-            balance += sum;
+            if (type == CategoryType.INCOME) {
+            	balance += sum;
+            } else {
+            	balance -= sum;
+            }
             
             
             model.addAttribute(type.name(), categories);
             model.addAttribute(type.name()+ "Sum", sum);
         }
         
-        model.addAttribute("balance", balance/100);
+        model.addAttribute("balance", balance);
         
         
         return model;
