@@ -27,16 +27,13 @@ public class HomeController {
 
     // == handler methods ==
 	@GetMapping
-    public String home(Model model, Authentication auth){
+    public String home(Model model){
         
 		
 		
         model = categoryService.findAndSumByIncomeInCurrentMonth(model);
         model.addAttribute("currentMonth", LocalDate.now().getMonthValue());
         model.addAttribute("currentYear", LocalDate.now().getYear());
-        
-        User user = (User) auth.getPrincipal();
-        model.addAttribute("userFirstName", user.getFirstName());
         
         return "home";
     }
