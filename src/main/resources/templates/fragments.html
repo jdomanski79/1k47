@@ -45,7 +45,7 @@
             </a>
           </li>
           <li>
-            <hr>{{user.name}}
+            <hr><span sec:authentication="principal.firstName">Użytkownik</span>
           </li>
           <li>
             <a href="/logout">
