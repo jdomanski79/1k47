@@ -14,6 +14,7 @@ public final class ViewNames {
     public static final String TRANSACTION_VIEW = "transaction/transaction.view";
     public static final String TRANSACTION_DELETE = "transaction/transaction.delete";
     
+    public static final String READINGS_LIST ="reading/reading.list";
     // == constructors ==
     private ViewNames(){}
 }

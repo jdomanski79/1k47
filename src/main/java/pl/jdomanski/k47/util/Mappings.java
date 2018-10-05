@@ -20,7 +20,8 @@ public final class Mappings {
     public static final String TRANSACTION_DELETE  = TRANSACTION_ROOT + "/delete";
     public static final String TRANSACTION_VIEW  = TRANSACTION_ROOT + "/view";
     
-        
+    // --- readings mappings ---
+    public static final String READING_LIST = "/readings";
     // == constructor ==
     private Mappings(){}
 }
