@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layouts/layout}">
+<head>
+    <title> Odczyty licznika </title>
+</head>
+<body>
+
+<main class="main-content" layout:fragment="content">
+<h1 class="text-center" th:text="${message}">
+
+</h1>
+
+
+<!--
+    <label for="show-filters-checkbox" class="show-filters-checkbox">Filtry</label>
+    <input type="checkbox" id="show-filters-checkbox">
+
+    <form th:replace="fragments::transaction_filters_form">
+-->
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="table__header">Data</th>
+        <th class="table__header">Typ licznika</th>
+        <th class="table__header">Wartosc odczytu</th>
+        <th class="table__header">Kto</th>
+      </tr>
+      <tr class="js-clickable" th:each="reading : ${readings}" th:object="${reading}" 
+      		th:data-url="@{__${T(pl.jdomanski.k47.util.Mappings).READING_VIEW}__(id=*{id})}">
+        <td class="table__data align-center" th:text="*{shortDate}">data</td>
+        <td class="table__data ">
+        </td>
+        <td class="table__data currency" th:text="*{#numbers.formatDecimal(amount/100.0, 1, 'WHITESPACE', 2, 'COMMA')}">100.00</td>
+        <td class="table__data desktop" th:text="*{description}">Opis transakcji</td>
+        <td class="table__data align-center desktop" th:text="*{createdBy.firstName}"> Utworzy��</td>
+      </tr>
+</table>
+<!-- </main> -->
+
+
+</main>
+</body>
+</html>
