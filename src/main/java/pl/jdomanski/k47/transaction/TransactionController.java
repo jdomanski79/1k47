@@ -59,7 +59,6 @@ public class TransactionController {
         
         if (transaction == null){
             transaction = new Transaction();
-            transaction.setAmount(0L);
             transaction.setCategory(new Category());
             transaction.setDate(LocalDate.now());
         } 

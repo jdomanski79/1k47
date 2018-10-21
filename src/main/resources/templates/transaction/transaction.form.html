@@ -15,7 +15,7 @@
     
     <label for="sum" class="form__label">Kwota</label>
     <input class="form__input" type="number" step="0.01" name="amount" id="sum" maxlength="8" 
-    	 th:value="*{amount/100.0}"> 
+    	 th:value="*{amount} ? *{amount}/100.0 : ''">
 
 
     <label for="category" class="form__label">Kategoria</label>
