@@ -1,5 +1,4 @@
-- [ ] add HTML validation in forms: category.form, transaction.form
-#### User login
-- [ ] add user login.form
-- [ ] implement spring security
-
+- [X] implement spring security
+- [ ] usun kwote 0.0 na formularzu nowej transakcji
+- [ ] obsluga odczytow licznikow wody i energii
+- [ ] stronicowanie transakcji na liscie transakcji
