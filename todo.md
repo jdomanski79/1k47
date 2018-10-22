@@ -1,4 +1,6 @@
 - [X] implement spring security
-- [ ] usun kwote 0.0 na formularzu nowej transakcji
+- [X] usun kwote 0.0 na formularzu nowej transakcji
 - [ ] obsluga odczytow licznikow wody i energii
 - [ ] stronicowanie transakcji na liscie transakcji
+- [ ] możliwość wyboru miesiąca na stronie domowej
+- [ ] filtrowanie transakcji - miesiąc, kategoria, tekst na stronie transakcji
