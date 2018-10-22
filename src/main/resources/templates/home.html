@@ -13,6 +13,18 @@
  <h2>
    Bilans miesiąca: <span th:text="${#numbers.formatDecimal(balance/100.0, 1, 'WHITESPACE', 2, 'COMMA') + ' zł'}">Bilans w zł</span>
  </h2>
+<form>
+
+<label for="month">Miesiąc</label>
+<select name="month" id="month">
+	<option each="month: ${months}" vlue="${month}"
+		th:text="__${T(java.time.Month).of(1)}__"value="luty">Maj</option>
+</select>
+<label for="year">Rok</label>
+<select name="year" id="year">
+	<option value="2018">2018</option>
+</select>
+</form> 
  
 <table class="table">
     <tr>
