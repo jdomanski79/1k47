@@ -6,24 +6,40 @@
 <body>
 
 <main class="main-content" layout:fragment="content">
-
+<!-- 
 <h1>
    Witaj <span sec:authentication = "principal.firstName"> Użytkowniku!!</span>
  </h1>
+ -->
  <h2>
-   Bilans miesiąca: <span th:text="${#numbers.formatDecimal(balance/100.0, 1, 'WHITESPACE', 2, 'COMMA') + ' zł'}">Bilans w zł</span>
+   <span sec:authentication = "principal.firstName"></span> - 
+   <span th:text="__${T(java.time.Month).of(selectedMonth)
+   					.getDisplayName(T(java.time.format.TextStyle).FULL_STANDALONE, 
+					#locale)}__+' ' +${selectedYear}">
+   </span>
+   </br> 
+   <span th:text="${#numbers.formatDecimal(balance/100.0, 1, 'WHITESPACE', 2, 'COMMA') + ' zł'}">Bilans w zł</span>
  </h2>
 <form>
 
-<label for="month">Miesiąc</label>
 <select name="month" id="month">
-	<option each="month: ${months}" vlue="${month}"
-		th:text="__${T(java.time.Month).of(1)}__"value="luty">Maj</option>
+	<option th:each="month: ${#numbers.sequence(1,12)}" th:value="${month}"
+			th:text="__${T(java.time.Month).of(month)
+							.getDisplayName(T(java.time.format.TextStyle).FULL_STANDALONE, 
+							#locale)}__" 
+			value="luty"
+			th:selected="${month==selectedMonth}">
+		Maj
+	</option>
 </select>
-<label for="year">Rok</label>
 <select name="year" id="year">
-	<option value="2018">2018</option>
+	<option th:each="year: ${years}" th:value="year" 
+			th:text="${year}" 
+			th:selected="${selectedYear}" value="2018">
+		2018
+	</option>
 </select>
+<button type="submit">Zmien</button>
 </form> 
  
 <table class="table">
@@ -32,7 +48,7 @@
       <th class="table__header" th:text="${#numbers.formatDecimal(INCOMESum/100.0, 1, 'WHITESPACE', 2, 'COMMA') + ' zł'}"> Wpływy łącznie zł</th>
     </tr>
     <tr class="js-clickable" 
-        th:data-url="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTIONS_LIST}__(category=${categoryId},month=${currentMonth}, year=${currentYear})}" 
+        th:data-url="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTIONS_LIST}__(category=${categoryId},month=${selectedMonth}, year=${selectedYear})}" 
         th:each="category: ${INCOME}" 
         th:with="categoryId=${category[0]}, categoryName=${category[1]}, categoryAmount=${category[2]}">
         
@@ -45,7 +61,7 @@
       <th class="table__header" th:text="${#numbers.formatDecimal(OUTCOMESum/100.0, 1, 'WHITESPACE', 2, 'COMMA') + ' zł'}"> Wydatki łącznie zł</th>
     </tr>
     <tr class="js-clickable" 
-        th:data-url="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTIONS_LIST}__(category=${category[0]},month=${currentMonth}, year=${currentYear})}" 
+        th:data-url="@{__${T(pl.jdomanski.k47.util.Mappings).TRANSACTIONS_LIST}__(category=${category[0]},month=${selectedMonth}, year=${selectedYear})}" 
         th:each="category: ${OUTCOME}">
       <td class="table__data" th:text="${category[1]}">Nazwa kategorii</td>
       <td class="currency table__data" th:text="${#numbers.formatDecimal(category[2]/100.0, 1, 'WHITESPACE',2 , 'COMMA') + ' zł'}">Kwota zł</td>

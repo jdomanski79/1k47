@@ -12,9 +12,9 @@ public interface TransactionRepository extends CrudRepository<Transaction, Integ
     public List<Transaction> findAllByOrderByDateDesc();
     
     @Query("select t.category.id, t.category.name, sum(t.amount) from Transaction t " + 
-        "where t.category.type = ?1 and Month(t.date) = Month(curdate()) and year(t.date) = year(curdate()) " +
+        "where t.category.type = ?1 and Month(t.date) = ?2 and year(t.date) = ?3 " +
         "Group by t.category order by sum(t.amount) desc")
-    public List<Object[]> findByTypeAndSumAmountInCurrentMonth(CategoryType type);
+    public List<Object[]> findByTypeAndMonthAndYearSumAmount(CategoryType type, int month, int year);
     
     public Transaction findById(int id);
     

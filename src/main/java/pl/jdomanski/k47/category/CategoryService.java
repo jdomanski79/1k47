@@ -66,7 +66,7 @@ public class CategoryService {
         categoryRepository.save(category);
     }
 
-    public Model findAndSumByIncomeInCurrentMonth(Model model){
+    public Model findAndSumByIncome(Model model, int month, int year){
         
         
         List<Object[]> categories;
@@ -75,8 +75,7 @@ public class CategoryService {
         
         for (CategoryType type : CategoryType.values()){
             
-            categories = transactionRepository.findByTypeAndSumAmountInCurrentMonth(type);
-            
+            categories = transactionRepository.findByTypeAndMonthAndYearSumAmount(type, month, year);
             sum = 0;
             for(Object[] c: categories){
                 sum += (long) c[2];
