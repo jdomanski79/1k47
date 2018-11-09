@@ -90,6 +90,10 @@ header {
   align-items: center;
 
 }
+
+ .logo-version {
+  	font-size: 0.25em;
+  }
 .nav-mobile {
   font-size: 3em;
   margin-right: 10px;
@@ -337,6 +341,9 @@ input[type=checkbox]:not(:checked) ~ .form {
   .logo {
     font-size: 3em;
   }
+  
+ 
+  
   .main-nav ul {
     display: block;
     text-align: left;

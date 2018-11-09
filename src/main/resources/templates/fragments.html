@@ -15,7 +15,7 @@
     <div class="container">
       <header th:fragment="header" class="main-head">
         <h1 class="logo">
-          <a href="/">1K47</a>
+          <a href="/">1K47</a><span class="logo-version" th:text="${'v' + @environment.getProperty('k47.version')}">Version</span>
         </h1>
         <div class="nav-mobile"><a id="nav-toggle" href="#">&#x2261;</a> </div>
       </header>
