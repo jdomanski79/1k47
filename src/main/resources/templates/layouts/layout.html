@@ -9,8 +9,11 @@
 		<nav th:replace="fragments::navigation"></nav>
 		<main class="main-content" layout:fragment="content">
 		</main>
+		
+		<footer th:text="${'By JD - ' + @environment.getProperty('k47.version')}">Version</footer>
 	</div>
 
+	
 	<script th:replace="fragments::script"></script>
 </body>
 </html>
