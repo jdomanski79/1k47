@@ -5,16 +5,16 @@
 
 	<groupId>pl.jdomanski</groupId>
 	<artifactId>1k47</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<packaging>jar</packaging>
 
 	<name>1k47</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Home finance manager</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.4.RELEASE</version>
+		<version>2.1.0.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -84,7 +84,7 @@
         </dependency>
         <dependency>
 	       <groupId>org.thymeleaf.extras</groupId>
-	       <artifactId>thymeleaf-extras-springsecurity4</artifactId>	
+	       <artifactId>thymeleaf-extras-springsecurity5</artifactId>	
         </dependency>
 
 	</dependencies>
